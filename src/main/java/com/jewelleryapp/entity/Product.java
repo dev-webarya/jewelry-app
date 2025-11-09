@@ -11,7 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Getter // Replaced @Data
+@Setter // Replaced @Data
+@ToString(exclude = {"category", "collections", "attributes", "images"}) // Added to break loop
+@EqualsAndHashCode(exclude = {"category", "collections", "attributes", "images"}) // Added to break loop
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -72,5 +75,4 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private Set<ProductImage> images = new HashSet<>();
-
 }

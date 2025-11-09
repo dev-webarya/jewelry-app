@@ -9,7 +9,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter // Replaced @Data
+@Setter // Replaced @Data
+@ToString(exclude = {"attributeType", "products"}) // Added to break loop
+@EqualsAndHashCode(exclude = {"attributeType", "products"}) // Added to break loop
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

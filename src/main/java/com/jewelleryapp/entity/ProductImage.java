@@ -8,7 +8,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
+@Getter // Replaced @Data
+@Setter // Replaced @Data
+@ToString(exclude = "product") // Added to break loop
+@EqualsAndHashCode(exclude = "product") // Added to break loop
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

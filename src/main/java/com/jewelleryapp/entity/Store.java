@@ -11,7 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Getter // Replaced @Data
+@Setter // Replaced @Data
+@ToString(exclude = "stockItems") // Added to break loop
+@EqualsAndHashCode(exclude = "stockItems") // Added to break loop
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
