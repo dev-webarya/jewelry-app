@@ -1,0 +1,1308 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-1234567890ab",
+		"name": "Jewellery API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"description": "Full CRUD testing for all 8 entities of the Jewellery App API."
+	},
+	"item": [
+		{
+			"name": "(1) Setup Flow (Run in order)",
+			"description": "Creates one of each entity and saves its ID to be used in other requests. Run these in order from top to bottom.",
+			"item": [
+				{
+					"name": "Create AttributeType 'Color'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"colorTypeId\", jsonData.id);",
+									"console.log(\"Set colorTypeId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Color\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attribute-types",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create AttributeValue 'Gold'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"goldValueId\", jsonData.id);",
+									"console.log(\"Set goldValueId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"attributeTypeId\": {{colorTypeId}},\r\n    \"value\": \"Gold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attribute-values",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-values"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category 'Rings'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"ringsCategoryId\", jsonData.id);",
+									"console.log(\"Set ringsCategoryId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rings\",\r\n    \"parentId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Collection 'Summer 2025'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"summerCollectionId\", jsonData.id);",
+									"console.log(\"Set summerCollectionId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Summer 2025\",\r\n    \"description\": \"Bright and bold designs.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/collections",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Store 'Main St. Showroom'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"mainStoreId\", jsonData.id);",
+									"console.log(\"Set mainStoreId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Main St. Showroom\",\r\n    \"address\": \"123 Main St, Anytown, USA\",\r\n    \"contactPhone\": \"555-1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stores",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product 'Gold Ring'",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"goldRingProductId\", jsonData.id);",
+									"console.log(\"Set goldRingProductId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sku\": \"G-RING-001\",\r\n    \"name\": \"Classic Gold Ring\",\r\n    \"basePrice\": 499.99,\r\n    \"isActive\": true,\r\n    \"categoryId\": {{ringsCategoryId}},\r\n    \"collectionIds\": [{{summerCollectionId}}],\r\n    \"attributeValueIds\": [{{goldValueId}}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Image to Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"ringImageId\", jsonData.id);",
+									"console.log(\"Set ringImageId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"{{goldRingProductId}}\",\r\n    \"imageUrl\": \"https://example.com/images/gold-ring.jpg\",\r\n    \"isPrimary\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product-images",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product-images"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Stock (Central)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"centralStockId\", jsonData.id);",
+									"console.log(\"Set centralStockId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"{{goldRingProductId}}\",\r\n    \"storeId\": null,\r\n    \"quantity\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Stock (Store)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.collectionVariables.set(\"storeStockId\", jsonData.id);",
+									"console.log(\"Set storeStockId to: \" + jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"{{goldRingProductId}}\",\r\n    \"storeId\": \"{{mainStoreId}}\",\r\n    \"quantity\": 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-items",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(2) CRUD - Categories",
+			"item": [
+				{
+					"name": "List Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Categories (Search by name)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories?name=Rings",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Rings"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Categories (Search for root)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories?isRoot=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "isRoot",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{ringsCategoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{ringsCategoryId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Rings (Updated)\",\r\n    \"parentId\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{ringsCategoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{ringsCategoryId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(3) CRUD - AttributeTypes",
+			"item": [
+				{
+					"name": "List AttributeTypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-types?name=Color",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-types"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Color"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AttributeType by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-types/{{colorTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-types",
+								"{{colorTypeId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AttributeType",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Color (Updated)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attribute-types/{{colorTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-types",
+								"{{colorTypeId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(4) CRUD - AttributeValues",
+			"item": [
+				{
+					"name": "List AttributeValues (Search by Type ID)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-values?attributeTypeId={{colorTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-values"
+							],
+							"query": [
+								{
+									"key": "attributeTypeId",
+									"value": "{{colorTypeId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get AttributeValue by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-values/{{goldValueId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-values",
+								"{{goldValueId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update AttributeValue",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"attributeTypeId\": {{colorTypeId}},\r\n    \"value\": \"18k Gold (Updated)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/attribute-values/{{goldValueId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-values",
+								"{{goldValueId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(5) CRUD - Collections",
+			"item": [
+				{
+					"name": "List Collections",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/collections?name=Summer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Summer"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Collection by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/collections/{{summerCollectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections",
+								"{{summerCollectionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Collection",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Summer 2025 (Updated)\",\r\n    \"description\": \"Updated description.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/collections/{{summerCollectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections",
+								"{{summerCollectionId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(6) CRUD - Stores",
+			"item": [
+				{
+					"name": "List Stores",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stores?name=Showroom",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Showroom"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Store by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stores/{{mainStoreId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores",
+								"{{mainStoreId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Store",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Main St. Showroom (Updated)\",\r\n    \"address\": \"123 Main St, Anytown, USA\",\r\n    \"contactPhone\": \"555-5678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stores/{{mainStoreId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores",
+								"{{mainStoreId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(7) CRUD - Products",
+			"item": [
+				{
+					"name": "List Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Products (Search by SKU)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products?sku=G-RING-001",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sku",
+									"value": "G-RING-001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Products (Search by Category)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products?categoryId={{ringsCategoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "{{ringsCategoryId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/{{goldRingProductId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{goldRingProductId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sku\": \"G-RING-001-UPDATED\",\r\n    \"name\": \"Classic Gold Ring (Updated)\",\r\n    \"basePrice\": 529.99,\r\n    \"isActive\": true,\r\n    \"categoryId\": {{ringsCategoryId}},\r\n    \"collectionIds\": [{{summerCollectionId}}],\r\n    \"attributeValueIds\": [{{goldValueId}}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{goldRingProductId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{goldRingProductId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(8) CRUD - ProductImages",
+			"item": [
+				{
+					"name": "List Images (by Product)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product-images?productId={{goldRingProductId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product-images"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "{{goldRingProductId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product-images/{{ringImageId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product-images",
+								"{{ringImageId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Image",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"{{goldRingProductId}}\",\r\n    \"imageUrl\": \"https://example.com/images/gold-ring-updated.jpg\",\r\n    \"isPrimary\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product-images/{{ringImageId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product-images",
+								"{{ringImageId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(9) CRUD - StockItems",
+			"item": [
+				{
+					"name": "List Stock (by Product)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items?productId={{goldRingProductId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items"
+							],
+							"query": [
+								{
+									"key": "productId",
+									"value": "{{goldRingProductId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Stock (by Store)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items?storeId={{mainStoreId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items"
+							],
+							"query": [
+								{
+									"key": "storeId",
+									"value": "{{mainStoreId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Stock (Central)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items?isCentral=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items"
+							],
+							"query": [
+								{
+									"key": "isCentral",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get StockItem by ID (Store)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items/{{storeStockId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items",
+								"{{storeStockId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update StockItem (Store)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": \"{{goldRingProductId}}\",\r\n    \"storeId\": \"{{mainStoreId}}\",\r\n    \"quantity\": 25\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/stock-items/{{storeStockId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items",
+								"{{storeStockId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "(10) Cleanup Flow (Run in reverse order)",
+			"description": "Deletes all the data created in the setup flow. Run in reverse order of creation to avoid data integrity errors.",
+			"item": [
+				{
+					"name": "Delete StockItem (Store)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items/{{storeStockId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items",
+								"{{storeStockId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete StockItem (Central)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stock-items/{{centralStockId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stock-items",
+								"{{centralStockId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ProductImage",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product-images/{{ringImageId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product-images",
+								"{{ringImageId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/{{goldRingProductId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{goldRingProductId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Store",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/stores/{{mainStoreId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"stores",
+								"{{mainStoreId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Collection",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/collections/{{summerCollectionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"collections",
+								"{{summerCollectionId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories/{{ringsCategoryId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"categories",
+								"{{ringsCategoryId}}"
+							]
+						}
+					},
+					"_response": []
+				},
+				{
+					"name": "Delete AttributeValue",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-values/{{goldValueId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-values",
+								"{{goldValueId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete AttributeType",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/attribute-types/{{colorTypeId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"attribute-types",
+								"{{colorTypeId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "colorTypeId",
+			"value": ""
+		},
+		{
+			"key": "goldValueId",
+			"value": ""
+		},
+		{
+			"key": "ringsCategoryId",
+			"value": ""
+		},
+		{
+			"key": "summerCollectionId",
+			"value": ""
+		},
+		{
+			"key": "mainStoreId",
+			"value": ""
+		},
+		{
+			"key": "goldRingProductId",
+			"value": ""
+		},
+		{
+			"key": "ringImageId",
+			"value": ""
+		},
+		{
+			"key": "centralStockId",
+			"value": ""
+		},
+		{
+			"key": "storeStockId",
+			"value": ""
+		}
+	]
+}
