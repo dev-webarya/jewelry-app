@@ -15,23 +15,21 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface ProductImageMapper {
 
     @Mapping(target = "productId", source = "product.id")
-    // FIX: The property name is 'primary' due to the 'isPrimary()' getter
-    @Mapping(target = "primary", source = "primary")
+    @Mapping(target = "primary", source = "primary") // Correct for getter isPrimary()
     ProductImageResponseDto toDto(ProductImage productImage);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "product", ignore = true) // Handled by service
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    // FIX: The property name is 'primary'
-    @Mapping(target = "primary", source = "primary")
+    // FIX: The builder method is isPrimary(), so target must be isPrimary
+    @Mapping(target = "isPrimary", source = "primary")
     ProductImage toEntity(ProductImageRequestDto requestDto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "product", ignore = true) // Handled by service
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
-    // FIX: The property name is 'primary'
-    @Mapping(target = "primary", source = "primary")
+    @Mapping(target = "primary", source = "primary") // Correct for setter setPrimary()
     void updateEntityFromDto(ProductImageRequestDto requestDto, @MappingTarget ProductImage productImage);
 }

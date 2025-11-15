@@ -25,15 +25,13 @@ public interface ProductMapper {
     @Mapping(target = "collections", source = "collections")
     @Mapping(target = "attributes", source = "attributes")
     @Mapping(target = "images", source = "images")
-    // FIX: The property name is 'active' due to the 'isActive()' getter
-    @Mapping(target = "active", source = "active")
+    @Mapping(target = "active", source = "active") // Correct for getter isActive()
     ProductResponseDto toDto(Product product);
 
     // Map nested entities to their simple DTOs
     ProductResponseDto.SimpleCollectionDto collectionToSimpleCollectionDto(Collection collection);
 
-    // FIX: The property name is 'primary'
-    @Mapping(target = "primary", source = "primary")
+    @Mapping(target = "primary", source = "primary") // Correct for getter isPrimary()
     ProductResponseDto.SimpleProductImageDto productImageToSimpleProductImageDto(ProductImage productImage);
 
     @Mapping(target = "attributeTypeId", source = "attributeType.id")
@@ -50,8 +48,8 @@ public interface ProductMapper {
     @Mapping(target = "collections", ignore = true) // Handled by service
     @Mapping(target = "attributes", ignore = true) // Handled by service
     @Mapping(target = "images", ignore = true)
-    // FIX: The property name is 'active'
-    @Mapping(target = "active", source = "active")
+    // FIX: The builder method is isActive(), so target must be isActive
+    @Mapping(target = "isActive", source = "active")
     Product toEntity(ProductRequestDto requestDto);
 
     @Mapping(target = "id", ignore = true)
@@ -61,7 +59,6 @@ public interface ProductMapper {
     @Mapping(target = "collections", ignore = true) // Handled by service
     @Mapping(target = "attributes", ignore = true) // Handled by service
     @Mapping(target = "images", ignore = true)
-    // FIX: The property name is 'active'
-    @Mapping(target = "active", source = "active")
+    @Mapping(target = "active", source = "active") // Correct for setter setActive()
     void updateEntityFromDto(ProductRequestDto requestDto, @MappingTarget Product product);
 }

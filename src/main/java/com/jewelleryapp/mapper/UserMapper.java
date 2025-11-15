@@ -12,15 +12,21 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
+    // FIX: Changed 'disable = true' to the correct attribute 'disableBuilder = true'.
+    // This forces MapStruct to use the default constructor and setters,
+    // which avoids the conflict with UserDetails methods.
+    @BeanMapping(builder = @Builder(disableBuilder = true))
     @Mapping(target = "email", source = "email")
     @Mapping(target = "roles", ignore = true) // Roles are handled by service
     @Mapping(target = "password", ignore = true) // Handled by service
     @Mapping(target = "phoneNumber", ignore = true) // Handled by service
-    // FIX: The Builder method is 'isEnabled()', so the target must be 'isEnabled'
-    @Mapping(target = "isEnabled", ignore = true)
+    // When using setters, the property name is 'enabled' (from setEnabled)
+    @Mapping(target = "enabled", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
+    // These properties don't have setters, so they are now implicitly ignored
+    // (We can leave the ignores for clarity, but they are no longer needed)
     @Mapping(target = "authorities", ignore = true)
     @Mapping(target = "accountNonExpired", ignore = true)
     @Mapping(target = "accountNonLocked", ignore = true)
@@ -35,7 +41,7 @@ public interface UserMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "email", source = "email") // Renamed from username
     @Mapping(target = "password", ignore = true) // Never map password during a direct update
-    // FIX: The setter method is 'setEnabled()', so the target must be 'enabled'
+    // This is correct: The setter method is 'setEnabled()', so target is 'enabled'
     @Mapping(target = "enabled", ignore = true)
     @Mapping(target = "roles", ignore = true) // Role update should be a separate process
     @Mapping(target = "createdAt", ignore = true)
